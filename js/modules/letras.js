@@ -43,7 +43,7 @@ export async function loadDictionary({ newGameButton }) {
   newGameButton.textContent = "Cargando diccionario...";
 
   try {
-    const response = await fetch("/data/palabras.txt");
+    const response = await fetch("./data/palabras.txt");
 
     if (!response.ok) {
       throw new Error(`No se pudo cargar /data/palabras.txt (${response.status})`);
