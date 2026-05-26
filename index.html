@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrenador Cifras y Letras</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <h1>Cifras y Letras</h1>
+        <p>Simulador de entrenamiento con partidas rápidas, cronómetro, resolutor y estadísticas locales.</p>
+      </div>
+      <div class="top-controls">
+        <label class="difficulty-field" for="difficultySelect">
+          <span>Dificultad</span>
+          <select id="difficultySelect">
+            <option value="easy" selected>Fácil</option>
+            <option value="medium">Medio</option>
+            <option value="pro">Pro</option>
+          </select>
+        </label>
+        <nav class="mode-tabs" aria-label="Modo de juego">
+          <button class="tab active" type="button" data-mode="letters">Prueba de Letras</button>
+          <button class="tab" type="button" data-mode="numbers">Prueba de Cifras</button>
+        </nav>
+      </div>
+    </header>
+
+    <section class="board">
+      <div class="play-area">
+        <div class="game-header">
+          <h2 id="gameTitle">Prueba de Letras</h2>
+          <div class="timer" id="timer" aria-live="polite">30</div>
+        </div>
+
+        <section id="lettersGame">
+          <div class="letters-grid" id="lettersGrid" aria-label="Letras disponibles"></div>
+        </section>
+
+        <section id="numbersGame" class="hidden">
+          <div class="target">
+            <div>
+              <span>Objetivo</span>
+              <strong id="targetNumber">---</strong>
+            </div>
+          </div>
+          <div class="numbers-grid" id="numbersGrid" aria-label="Números disponibles"></div>
+          <div class="equation-panel">
+            <p class="panel-title">Tu ecuación</p>
+            <div class="equation-row">
+              <input id="answerInput" class="equation-input" type="text" autocomplete="off" readonly placeholder="Pulsa números y operaciones" />
+              <button class="icon-btn" id="micBtn" type="button" title="Dictar operación" aria-label="Dictar operación">🎙</button>
+            </div>
+          </div>
+          <div class="virtual-keyboard" id="virtualKeyboard">
+            <div>
+              <p class="panel-title">Operaciones</p>
+              <div class="key-grid operation-key-grid" id="operationKeys"></div>
+            </div>
+          </div>
+        </section>
+
+        <form class="answer-form" id="answerForm">
+          <input id="lettersAnswerInput" type="text" autocomplete="off" placeholder="Escribe tu palabra" />
+          <button class="primary-btn" id="checkBtn" type="submit">Comprobar</button>
+        </form>
+
+        <div class="status" id="status" role="status" aria-live="polite">Pulsa Nueva Partida para empezar.</div>
+
+        <section class="agent-panel" id="agentPanel" aria-live="polite">
+          <h3>La máquina dice:</h3>
+          <p id="agentOutput">Esperando a que termine el tiempo.</p>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <button class="secondary-btn" id="newGameBtn" type="button" disabled>Cargando diccionario...</button>
+
+        <div id="lettersSettings">
+          <p class="panel-title">Configuración</p>
+          <div class="settings">
+            <div class="field">
+              <label for="vowelCount">Vocales</label>
+              <input id="vowelCount" type="number" min="0" max="9" value="4" />
+            </div>
+            <div class="field">
+              <label for="consonantCount">Consonantes</label>
+              <input id="consonantCount" type="number" min="0" max="9" value="5" />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="panel-title">Ronda actual</p>
+          <ul class="hint-list" id="roundInfo"></ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <button class="stats-fab" id="statsBtn" type="button">Estadísticas</button>
+
+  <div class="modal-backdrop" id="statsModal" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="statsTitle">Resumen estadístico</h2>
+        <button class="close-btn" id="closeStatsBtn" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span>Aciertos en Cifras</span>
+          <strong id="numbersSuccessRate">0%</strong>
+        </div>
+        <div class="stat-card">
+          <span>Aciertos en Letras</span>
+          <strong id="lettersSuccessRate">0%</strong>
+        </div>
+        <div class="stat-card">
+          <span>Media ganadas</span>
+          <strong id="avgWinTime">0s</strong>
+        </div>
+      </div>
+      <p class="modal-note" id="statsNote">Los datos se guardan localmente en este navegador.</p>
+    </div>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
